@@ -1,0 +1,26 @@
+- name: install custom iosevka font
+  copy:
+    src: ~/.config/devenv/files/iosevka-custom/
+    dest: ~/Library/Fonts/
+
+- name: install base16 scripts
+  git:
+    repo: https://github.com/chriskempson/base16-shell.git
+    dest: ~/.config/base16-shell
+    update: yes
+
+# does not run with zsh
+# - name: pick a base16 theme
+#   shell: base16_circus
+#   args:
+#     executable: /bin/zsh
+
+- name: install vundle
+  git:
+    repo: https://github.com/VundleVim/Vundle.vim.git
+    dest: ~/.vim/bundle/Vundle.vim
+    update: yes
+
+- name: install all vim plugins
+  shell: vim +PluginInstall +qall
+  changed_when: False

@@ -1,0 +1,14 @@
+- name: tap chunkwm
+  homebrew_tap:
+    name: crisidev/homebrew-chunkwm
+    state: present
+
+- name: install chunkwm
+  homebrew:
+    name: chunkwm
+    state: present
+
+- name: install skhd
+  homebrew:
+    name: koekeishiya/formulae/skhd
+    state: present

@@ -3,13 +3,11 @@
     name:
     - ag
     - bat
-    - chunkwm
     - diff-so-fancy
     - gpatch # for opam
     - hub
     - ocaml
     - opam
-    - skhd
     - sleepwatcher
     - task
     - timewarrior
