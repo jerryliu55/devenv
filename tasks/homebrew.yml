@@ -1,0 +1,19 @@
+- name: install homebrew packages
+  homebrew:
+    name:
+    - ag
+    - bat
+    - chunkwm
+    - diff-so-fancy
+    - gpatch # for opam
+    - hub
+    - ocaml
+    - opam
+    - skhd
+    - sleepwatcher
+    - task
+    - timewarrior
+    - tmux
+    - vim
+    - zsh
+    state: present

@@ -1,0 +1,7 @@
+- hosts: localhost
+  connection: local
+  tasks:
+  # - import_tasks: tasks/homebrew.yml
+  # - import_tasks: tasks/homebrew_cask.yml
+  # - import_tasks: tasks/oh_my_zsh.yml
+  - import_tasks: tasks/terminal_aesthetics.yml

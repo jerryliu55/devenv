@@ -1,0 +1,20 @@
+# inspired by https://github.com/kevintpeng/dev-environment-as-code
+
+- name: check existence of oh-my-zsh
+  stat:
+    path: ~/.oh-my-zsh
+  register: oh_my_zsh
+
+- name: install oh-my-zsh
+  shell: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  when: oh_my_zsh.stat.exists == False
+
+- name: zsh custom theme directory
+  file:
+    path: ~/.oh-my-zsh/custom/themes
+    state: directory
+
+- name: zsh custom theme
+  copy:
+    src: ~/projects/devenv/files/dpoggi-modified.zsh-theme
+    dest: ~/.oh-my-zsh/custom/themes/dpoggi-modified.zsh-theme

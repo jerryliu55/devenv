@@ -1,0 +1,11 @@
+- name: install homebrew cask apps
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+    accept_external_apps: yes
+  with_items:
+    - 1password
+    - google-chrome
+    - iterm2
+    - karabiner-elements
+    - steam
