@@ -16,5 +16,5 @@
 
 - name: zsh custom theme
   copy:
-    src: ~/projects/devenv/files/dpoggi-modified.zsh-theme
+    src: ~/.config/devenv/files/dpoggi-modified.zsh-theme
     dest: ~/.oh-my-zsh/custom/themes/dpoggi-modified.zsh-theme
