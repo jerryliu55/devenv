@@ -7,25 +7,23 @@
   with_items:
     - .chunkwmrc
     - .gitconfig
+    - .mackup.cfg
     - .profile
     - .skhdrc
+    - .sleepscript
     - .tmux.conf
     - .vimrc
     - .zshrc
-    - .mackup.cfg # todo
-    - .sleepscript # todo
 
-# todo
 - name: create dir .mackup
   file:
     path: ~/.mackup
     state: directory
     recurse: no
 
-# todo
 - name: link .mackup/custom.cfg
   file:
-    src: ~/.dotfiles/.mackup/custom.cfg
+    src: ~/.config/devenv/files/mackup_custom.cfg
     dest: ~/.mackup/custom.cfg
     state: link
     force: yes

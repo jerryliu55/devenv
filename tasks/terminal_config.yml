@@ -23,22 +23,9 @@
 
 - name: install all vim plugins
   shell: vim +PluginInstall +qall
+  args:
+    executable: "/bin/zsh"
   changed_when: False
-
-# taskwarrior setup
-
-- name: clone taskdata repo
-  git:
-    repo: git@github.com:jerryliu55/taskdata.git
-    dest: ~/.task/
-    update: no
-
-- name: link .taskrc
-  file:
-    src: "~/.task/.taskrc"
-    dest: "~/.taskrc"
-    state: link
-    force: yes
 
 # timewarrior automatically stop on sleep
 
