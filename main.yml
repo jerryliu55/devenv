@@ -3,11 +3,11 @@
   become: true
   become_user: "{{ username }}"
   tasks:
-  - import_tasks: tasks/dotfiles.yml
-  - import_tasks: tasks/homebrew.yml
-  - import_tasks: tasks/homebrew_cask.yml
-  - import_tasks: tasks/oh_my_zsh.yml
+  # - import_tasks: tasks/dotfiles.yml
+  # - import_tasks: tasks/homebrew.yml
+  # - import_tasks: tasks/homebrew_cask.yml
+  # - import_tasks: tasks/oh_my_zsh.yml
   - import_tasks: tasks/terminal_config.yml
-  - import_tasks: tasks/window_manager.yml
-  - import_tasks: tasks/mackup.yml
-  - import_tasks: tasks/dotfiles.yml
+  # - import_tasks: tasks/window_manager.yml
+  # - import_tasks: tasks/mackup.yml
+  # - import_tasks: tasks/dotfiles.yml

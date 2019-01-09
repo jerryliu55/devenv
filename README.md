@@ -27,3 +27,8 @@ set up opam
 
 1. in `System Preferences > Keyboard > Shortcuts` set keyboard shorcuts `ctrl - 1`, `ctrl - 2`, etc.
 1. in `System Preferences > Accessibility > Display check` "Reduce motion"
+
+### Tmux plugins
+
+1. inside tmux run `<prefix> + I` to install plugins
+1. `tmux source ~/.tmux.conf`

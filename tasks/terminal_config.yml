@@ -27,6 +27,12 @@
     executable: "/bin/zsh"
   changed_when: False
 
+- name: install tmux plugin manager (tpm)
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+    update: yes
+
 # timewarrior automatically stop on sleep
 
 - name: add sleepwatcher daemon plist
