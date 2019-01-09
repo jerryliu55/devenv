@@ -1,3 +1,8 @@
+- name: initialize the iosevka submodule
+  shell: git submodule init && git submodule update
+  args:
+    chdir: ~/.config/devenv
+
 - name: install custom iosevka font
   copy:
     src: ~/.config/devenv/files/iosevka-custom/
