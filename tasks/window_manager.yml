@@ -1,6 +1,6 @@
 - name: tap chunkwm
   homebrew_tap:
-    name: crisidev/homebrew-chunkwm
+    name: koekeishiya/formulae
     state: present
 
 - name: install chunkwm
