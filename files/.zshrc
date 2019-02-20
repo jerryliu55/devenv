@@ -141,6 +141,7 @@ alias bexec="bundle exec"
 alias pt=ptpython
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias hab=habitica
+alias socks="ssh -D 8123 -C -q -N waterloocs"
 
 # taskwarrior setup ============================================================
 alias t=task
