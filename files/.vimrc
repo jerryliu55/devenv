@@ -37,6 +37,7 @@ Plugin 'vim-scripts/ucpp-vim-syntax' " uC++ syntax highlighting
 Plugin 'dhruvasagar/vim-table-mode' " easily make tables in md
 Plugin 'ferrine/md-img-paste.vim' " paste image to directory and add to markdown
 Plugin 'EinfachToll/DidYouMean' " description in github page https://github.com/EinfachToll/DidYouMean
+Plugin 'junegunn/goyo.vim' " focused writing
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
