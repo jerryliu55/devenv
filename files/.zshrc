@@ -134,8 +134,6 @@ export EDITOR="$VISUAL"
 
 # utility aliases ==============================================================
 alias c=clear
-alias s=spotify
-alias f=fg
 alias cat="bat --style=plain --theme=DarkNeon"
 alias bexec="bundle exec"
 alias pt=ptpython
@@ -166,7 +164,13 @@ alias timew7='timew month $(date -v-1w +"%Y-%m-%d") to $(date -v+1d +"%Y-%m-%d")
 alias git=hub
 alias gpocb="git push --set-upstream origin \$(git rev-parse --abbrev-ref HEAD)"
 
-# Golang
+# fasd =========================================================================
+eval "$(fasd --init auto)"
+
+## additional aliases
+alias v='f -e vim' # quick opening files with vim
+
+# Golang =======================================================================
 export GOPATH=$HOME/go
 export GOROOT=$HOME/go
 export PATH=$PATH:$GOPATH/bin
@@ -189,6 +193,9 @@ export PATH=$PATH:$HOME/racket_v6_11/bin
 
 # macports
 export PATH=$PATH:/opt/local/bin
+
+# google cloud
+export PATH=$PATH:~/.tools/google-cloud-sdk/bin
 
 # opam configuration
 test -r /Users/jerryliu/.opam/opam-init/init.zsh && . /Users/jerryliu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
