@@ -168,14 +168,11 @@ alias gpocb="git push --set-upstream origin \$(git rev-parse --abbrev-ref HEAD)"
 eval "$(fasd --init auto)"
 
 ## additional aliases
-alias v='f -e vim' # quick opening files with vim
+alias v='f -t -e vim -b viminfo' # quick opening files with vim
 
 # Golang =======================================================================
 export GOPATH=$HOME/go
-export GOROOT=$HOME/go
 export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
-export PATH=$PATH:$HOME/protoc-3.5.1-osx-x86_64/bin
 
 # binds hex 0x18 0x7f with deleting everything to the left of the cursor
 bindkey "^X\\x7f" backward-kill-line

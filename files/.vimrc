@@ -1,79 +1,46 @@
-" Vundle
-set nocompatible              " be iMproved, required
-filetype off                  " required
+" vim-plug
+" Auto-install vim-plug
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
+call plug#begin('~/.vim/bundle')
 " My plugins
-Plugin 'itchyny/lightline.vim'
-Plugin 'scrooloose/nerdcommenter' " comment lines easily
-Plugin 'scrooloose/nerdtree' " fs explorer
-Plugin 'Xuyuanp/nerdtree-git-plugin' " git status flags for nerd tree
-Plugin 'mileszs/ack.vim' " for searching
-Plugin 'tpope/vim-fugitive' " git plugin
-Plugin 'airblade/vim-gitgutter' " git diff in gutter (by line numbers)
-Plugin 'tpope/vim-surround' " surround characters
-Plugin 'jiangmiao/auto-pairs' " autoclose brackets and quotes
-Plugin 'ervandew/supertab' " autocomplete with tab
-Plugin 'chriskempson/base16-vim' " themes
-Plugin 'gcmt/taboo.vim' " rename tabs
-Plugin 'sheerun/vim-polyglot' " better language specific syntax and indentation
-Plugin 'ciaranm/detectindent' " auto detect indentation 
-Plugin 'flazz/vim-colorschemes'
-Plugin 'kien/ctrlp.vim'
-Plugin 'zenbro/mirror.vim' " easily edit remote files
-Plugin 'wlangstroth/vim-racket' " racket
-Plugin 'xuhdev/vim-latex-live-preview' " live preview latex files
-Plugin 'easymotion/vim-easymotion' " faster navigation
-Plugin 'christoomey/vim-tmux-navigator' " easy navigation b/w vim and tmux
-Plugin 'vim-scripts/ucpp-vim-syntax' " uC++ syntax highlighting
-Plugin 'dhruvasagar/vim-table-mode' " easily make tables in md
-Plugin 'ferrine/md-img-paste.vim' " paste image to directory and add to markdown
-Plugin 'EinfachToll/DidYouMean' " description in github page https://github.com/EinfachToll/DidYouMean
-Plugin 'junegunn/goyo.vim' " focused writing
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-"Plugin 'ascenator/L9', {'name': 'newL9'}
+Plug 'itchyny/lightline.vim'
+Plug 'scrooloose/nerdcommenter' " comment lines easily
+Plug 'scrooloose/nerdtree' " fs explorer
+Plug 'Xuyuanp/nerdtree-git-plugin' " git status flags for nerd tree
+Plug 'mileszs/ack.vim' " for searching
+Plug 'tpope/vim-fugitive' " git plugin
+Plug 'airblade/vim-gitgutter' " git diff in gutter (by line numbers)
+Plug 'tpope/vim-surround' " surround characters
+Plug 'jiangmiao/auto-pairs' " autoclose brackets and quotes
+" Plug 'ervandew/supertab' " autocomplete with tab
+Plug 'chriskempson/base16-vim' " themes
+Plug 'gcmt/taboo.vim' " rename tabs
+Plug 'sheerun/vim-polyglot' " better language specific syntax and indentation
+Plug 'ciaranm/detectindent' " auto detect indentation 
+Plug 'flazz/vim-colorschemes'
+Plug 'kien/ctrlp.vim'
+Plug 'zenbro/mirror.vim' " easily edit remote files
+Plug 'wlangstroth/vim-racket' " racket
+Plug 'xuhdev/vim-latex-live-preview' " live preview latex files
+Plug 'easymotion/vim-easymotion' " faster navigation
+Plug 'christoomey/vim-tmux-navigator' " easy navigation b/w vim and tmux
+Plug 'vim-scripts/ucpp-vim-syntax' " uC++ syntax highlighting
+Plug 'dhruvasagar/vim-table-mode' " easily make tables in md
+Plug 'ferrine/md-img-paste.vim' " paste image to directory and add to markdown
+Plug 'EinfachToll/DidYouMean' " description in github page https://github.com/EinfachToll/DidYouMean
+Plug 'junegunn/goyo.vim' " focused writing
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " better completion and intellisense
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-" end Vundle
+call plug#end()
+" end vim-plug
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 " Override default leader
 let mapleader="\<Space>"
@@ -121,6 +88,7 @@ autocmd FileType cc setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType cpp setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType c setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType ucpp setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType json syntax match Comment +\/\/.\+$+ " jsonc
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI config
@@ -135,6 +103,7 @@ set lazyredraw " redraw only when we need to - faster macros
 set showmatch " highlight matching [{()}]
 set colorcolumn=80,120 " show column guides
 set noshowmode " remove --INSERT-- since it's on status line
+set cmdheight=2 " better display messages
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
@@ -191,9 +160,6 @@ nnoremap <leader>u :GundoToggle<CR>
 " quickly ack
 nnoremap <leader>a :Ack! 
 
-" TODO: install ag.vim
-" TODO: install ctrlp.vim
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline
 let g:airline_powerline_fonts=1 " enable powerline symbols and glyphs
@@ -228,7 +194,13 @@ let g:NERDTrimTrailingWhitespace = 1 " enable trimming of trailing whitespace wh
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CtrlP
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard'] " ignore files under .git
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others'],
+    \ 2: ['.hg', 'hg --cwd %s locate -I .'],
+    \ },
+  \ 'fallback': 'find %s -type f'
+\ }
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " ag is faster than vim native glob
 endif
@@ -243,7 +215,7 @@ nnoremap <leader>mps :MirrorPush<CR><CR><CR>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " live latex preview
 
-autocmd Filetype tex setl updatetime=1 " update every second?
+autocmd Filetype tex setl updatetime=5
 let g:livepreview_previewer = 'open -a Preview'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -284,6 +256,45 @@ let g:mdip_imgdir = 'images'
 " let g:mdip_imgname = 'image' " default
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" coc.nvim
+" automatically format code and add missing imports on save
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)zz
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-go
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_generate_tags = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
 set clipboard=unnamed " to yank to system clipboard
 set timeoutlen=1000 ttimeoutlen=0 " mode changes (pressing 'esc') update status immediately
@@ -295,9 +306,11 @@ set wildmode=list:longest,full
 
 inoremap jj <Esc>
 
-set shortmess=a " short messages to avoid hit-enter prompts
-
 set undodir=~/.vim/undodir " undodir for cross-session undo/redo stacks
+set bdir-=.
+set bdir+=/tmp
+set dir-=.
+set dir+=/tmp
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OCAML

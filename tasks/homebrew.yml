@@ -5,6 +5,8 @@
     - bat
     - diff-so-fancy
     - fasd
+    - fd
+    - fzf
     - gpatch # for opam
     - hub
     - mackup

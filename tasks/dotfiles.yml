@@ -5,7 +5,6 @@
     state: link
     force: yes
   with_items:
-    - .chunkwmrc
     - .gitconfig
     - .mackup.cfg
     - .profile
@@ -13,6 +12,7 @@
     - .sleepscript
     - .tmux.conf
     - .vimrc
+    - .yabairc
     - .zshrc
 
 - name: create dir .mackup

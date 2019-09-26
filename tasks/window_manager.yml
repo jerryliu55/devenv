@@ -1,11 +1,11 @@
-- name: tap chunkwm
+- name: tap yabai
   homebrew_tap:
     name: koekeishiya/formulae
     state: present
 
-- name: install chunkwm
+- name: install yabai
   homebrew:
-    name: chunkwm
+    name: yabai
     state: present
 
 - name: install skhd
