@@ -170,6 +170,11 @@ eval "$(fasd --init auto)"
 ## additional aliases
 alias v='f -t -e vim -b viminfo' # quick opening files with vim
 
+# fzf ==========================================================================
+export FZF_DEFAULT_COMMAND="fd --type f"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --inline-info"
+alias vzf="vim \$(fzf)"
+
 # Golang =======================================================================
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
