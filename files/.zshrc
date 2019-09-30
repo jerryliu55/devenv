@@ -141,6 +141,11 @@ alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias hab=habitica
 alias socks="ssh -D 8123 -C -q -N waterloocs"
 
+# replace does multi-file find-and-replace in the current directory
+function replace {
+  sed -i '' "s/$1/$2/" $(git grep -l $1)
+}
+
 # taskwarrior setup ============================================================
 alias t=task
 alias in='task add +in'

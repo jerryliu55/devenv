@@ -23,7 +23,9 @@ Plug 'gcmt/taboo.vim' " rename tabs
 Plug 'sheerun/vim-polyglot' " better language specific syntax and indentation
 Plug 'ciaranm/detectindent' " auto detect indentation 
 Plug 'flazz/vim-colorschemes'
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
+Plug '/usr/local/opt/fzf' " for fzf.vim
+Plug 'junegunn/fzf.vim'
 Plug 'zenbro/mirror.vim' " easily edit remote files
 Plug 'wlangstroth/vim-racket' " racket
 Plug 'xuhdev/vim-latex-live-preview' " live preview latex files
@@ -205,6 +207,10 @@ if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " ag is faster than vim native glob
 endif
 let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp' " cache index
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf.vim
+nnoremap <C-P> :FZF<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mirrors
