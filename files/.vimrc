@@ -107,6 +107,8 @@ set colorcolumn=80,120 " show column guides
 set noshowmode " remove --INSERT-- since it's on status line
 set cmdheight=2 " better display messages
 
+highlight Comment cterm=italic "italic comments
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Searching
 set incsearch " search as characters are entered
@@ -145,6 +147,10 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" Move visual selection
+vnoremap J :m '>+1<cr>gv=gv
+vnoremap K :m '<-2<cr>gv=gv
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader shortcuts
@@ -211,6 +217,8 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp' " cache index
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf.vim
 nnoremap <C-P> :FZF<CR>
+
+let g:fzf_layout = { 'down': '~75%' }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mirrors
@@ -287,8 +295,15 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Coc only does snippet and additional edit on confirm.
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
+" Highlight symbol under cursor on CursorHold
+highlight CocHighlightText ctermfg=Black ctermbg=Green
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
 " Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)zz
+nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)

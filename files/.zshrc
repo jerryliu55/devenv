@@ -103,7 +103,7 @@ export SSH_KEY_PATH="~/.ssh/id_rsa"
 ssh-add ~/.ssh/id_rsa
 
 # tmux
-export TERM=xterm-256color
+# export TERM=xterm-256color-italics
 alias tmux-pl='powerline-daemon -q; tmux source "/Users/jerryliu/Library/Python/3.6/lib/python/site-packages/powerline/bindings/tmux/powerline.conf"'
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -166,6 +166,7 @@ alias timew30='timew month $(date -v-1m +"%Y-%m-%d") to $(date -v+1d +"%Y-%m-%d"
 alias timew7='timew month $(date -v-1w +"%Y-%m-%d") to $(date -v+1d +"%Y-%m-%d")'
 
 # git ==========================================================================
+alias glg="git log --oneline --graph --decorate -n 25"
 alias git=hub
 alias gpocb="git push --set-upstream origin \$(git rev-parse --abbrev-ref HEAD)"
 
@@ -176,9 +177,10 @@ eval "$(fasd --init auto)"
 alias v='f -t -e vim -b viminfo' # quick opening files with vim
 
 # fzf ==========================================================================
+export FZF_COMPLETION_TRIGGER="~~"
 export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --inline-info"
-alias vzf="vim \$(fzf)"
+export FZF_DEFAULT_OPTS="--height 75% --layout=reverse --inline-info --preview 'pygmentize {} 2>/dev/null || cat {}'"
+alias vzf="nvim \$(fzf)"
 
 # Golang =======================================================================
 export GOPATH=$HOME/go
@@ -206,3 +208,5 @@ export PATH=$PATH:~/.tools/google-cloud-sdk/bin
 
 # opam configuration
 test -r /Users/jerryliu/.opam/opam-init/init.zsh && . /Users/jerryliu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+source ~/.zshrc.work
