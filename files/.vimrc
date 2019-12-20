@@ -20,7 +20,6 @@ Plug 'jiangmiao/auto-pairs' " autoclose brackets and quotes
 " Plug 'ervandew/supertab' " autocomplete with tab
 Plug 'chriskempson/base16-vim' " themes
 Plug 'gcmt/taboo.vim' " rename tabs
-Plug 'sheerun/vim-polyglot' " better language specific syntax and indentation
 Plug 'ciaranm/detectindent' " auto detect indentation 
 Plug 'flazz/vim-colorschemes'
 " Plug 'kien/ctrlp.vim'
@@ -38,6 +37,7 @@ Plug 'EinfachToll/DidYouMean' " description in github page https://github.com/Ei
 Plug 'junegunn/goyo.vim' " focused writing
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " better completion and intellisense
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'sheerun/vim-polyglot' " better language specific syntax and indentation
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -304,9 +304,24 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :call <SID>definitionVsplit()<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+function! s:definitionVsplit()
+  call CocAction('jumpDefinition', 'vsplit')
+endfunction
+
+" show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-go
@@ -315,7 +330,11 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_types = 1
 let g:go_highlight_generate_tags = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
 set clipboard=unnamed " to yank to system clipboard
 set timeoutlen=1000 ttimeoutlen=0 " mode changes (pressing 'esc') update status immediately
