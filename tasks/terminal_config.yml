@@ -37,24 +37,3 @@
     repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
     update: yes
-
-# timewarrior automatically stop on sleep
-
-- name: add sleepwatcher daemon plist
-  file:
-    src: "~/.config/devenv/files/de.bernhard-baehr.sleepwatcher-20compatibility.plist"
-    dest: "/Library/LaunchAgents/de.bernhard-baehr.sleepwatcher-20compatibility.plist"
-    state: hard
-  become: yes
-  become_user: root
-  become_method: su
-
-- name: check if sleepwatcher is running
-  command: launchctl list de.bernhard-baehr.sleepwatcher
-  register: launchctl_sleepwatcher
-  ignore_errors: true
-  changed_when: false
-
-- name: load sleepwatcher launch agent
-  command: launchctl load /Library/LaunchAgents/de.bernhard-baehr.sleepwatcher-20compatibility.plist
-  when: launchctl_sleepwatcher.rc == 113
