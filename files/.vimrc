@@ -20,7 +20,6 @@ Plug 'jiangmiao/auto-pairs' " autoclose brackets and quotes
 " Plug 'ervandew/supertab' " autocomplete with tab
 Plug 'chriskempson/base16-vim' " themes
 Plug 'gcmt/taboo.vim' " rename tabs
-Plug 'sheerun/vim-polyglot' " better language specific syntax and indentation
 Plug 'ciaranm/detectindent' " auto detect indentation 
 Plug 'flazz/vim-colorschemes'
 " Plug 'kien/ctrlp.vim'
@@ -359,6 +358,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gD :call <SID>definitionVsplit()<CR>
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -385,6 +385,21 @@ nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
 nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
 " Reveal current current class (trait or object) in Tree View 'metalsBuild'
 nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsBuild<CR>
+
+function! s:definitionVsplit()
+  call CocAction('jumpDefinition', 'vsplit')
+endfunction
+
+" show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-go
 let g:go_highlight_functions = 1
@@ -404,6 +419,11 @@ let g:indentLine_char = '▏'
 let g:rainbow_active = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" disable vim-go :GoDef short cut (gd)
+" this is handled by LanguageClient [LC]
+let g:go_def_mapping_enabled = 0
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
 set clipboard=unnamed " to yank to system clipboard
 set timeoutlen=1000 ttimeoutlen=0 " mode changes (pressing 'esc') update status immediately
