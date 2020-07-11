@@ -6,6 +6,7 @@ email = jerryliu55@gmail.com
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	excludesfile = /Users/jerryliu/.gitignore_global
+  editor=/usr/local/bin/nvim
 [color]
 	ui = true
 [color "diff-highlight"]

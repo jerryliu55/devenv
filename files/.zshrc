@@ -128,7 +128,7 @@ if [[ -f /opt/dev/dev.sh  ]] && [[ $- == *i*  ]]; then
 fi
 
 # utility env vars
-export JEKYLL_EDITOR=vim
+export JEKYLL_EDITOR=nvim
 export VISUAL=vim # use vim as default editor for everything
 export EDITOR="$VISUAL"
 
@@ -139,7 +139,8 @@ alias bexec="bundle exec"
 alias pt=ptpython
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias hab=habitica
-alias socks="ssh -D 8123 -C -q -N waterloocs"
+alias socks="ssh -D 8123 -C -q -N cs"
+# alias vim="/usr/local/Cellar/vim/8.2.0050_1/bin/vim"
 
 # replace does multi-file find-and-replace in the current directory
 function replace {
@@ -179,12 +180,20 @@ alias v='f -t -e vim -b viminfo' # quick opening files with vim
 # fzf ==========================================================================
 export FZF_COMPLETION_TRIGGER="~~"
 export FZF_DEFAULT_COMMAND="fd --type f"
-export FZF_DEFAULT_OPTS="--height 75% --layout=reverse --inline-info --preview 'pygmentize {} 2>/dev/null || cat {}'"
+# export FZF_DEFAULT_OPTS="--height 75% --layout=reverse --inline-info --preview 'pygmentize {} 2>/dev/null || cat {}'" " pygmentize is too slow
+export FZF_DEFAULT_OPTS="--height 75% --layout=reverse --inline-info --preview '/bin/cat {}'"
 alias vzf="nvim \$(fzf)"
 
 # Golang =======================================================================
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+# Java =========================================================================
+# export JAVA_HOME=/Library/Java/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk/Contents/Home/
+
+# Ruby =========================================================================
+export PATH=/usr/local/opt/ruby/bin:$PATH
 
 # binds hex 0x18 0x7f with deleting everything to the left of the cursor
 bindkey "^X\\x7f" backward-kill-line
@@ -209,4 +218,12 @@ export PATH=$PATH:~/.tools/google-cloud-sdk/bin
 # opam configuration
 test -r /Users/jerryliu/.opam/opam-init/init.zsh && . /Users/jerryliu/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-source ~/.zshrc.work
+# source ~/.zshrc.work
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/jerryliu/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jerryliu/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/jerryliu/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jerryliu/google-cloud-sdk/completion.zsh.inc'; fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

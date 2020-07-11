@@ -30,14 +30,18 @@ Plug 'zenbro/mirror.vim' " easily edit remote files
 Plug 'wlangstroth/vim-racket' " racket
 Plug 'xuhdev/vim-latex-live-preview' " live preview latex files
 Plug 'easymotion/vim-easymotion' " faster navigation
-Plug 'christoomey/vim-tmux-navigator' " easy navigation b/w vim and tmux
 Plug 'vim-scripts/ucpp-vim-syntax' " uC++ syntax highlighting
 Plug 'dhruvasagar/vim-table-mode' " easily make tables in md
 Plug 'ferrine/md-img-paste.vim' " paste image to directory and add to markdown
 Plug 'EinfachToll/DidYouMean' " description in github page https://github.com/EinfachToll/DidYouMean
 Plug 'junegunn/goyo.vim' " focused writing
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " better completion and intellisense
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'christoomey/vim-tmux-navigator' " easy navigation b/w vim and tmux
+Plug 'derekwyatt/vim-scala'
+Plug 'Yggdroot/indentLine' " show indentation guides
+Plug 'luochen1990/rainbow' " colour coded matching brackets
+Plug 'wellle/targets.vim' " adds additional text targets to vim for commands like ci'
+Plug 'psliwka/vim-smoothie' " smooth scrolling
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -105,7 +109,6 @@ set lazyredraw " redraw only when we need to - faster macros
 set showmatch " highlight matching [{()}]
 set colorcolumn=80,120 " show column guides
 set noshowmode " remove --INSERT-- since it's on status line
-set cmdheight=2 " better display messages
 
 highlight Comment cterm=italic "italic comments
 
@@ -143,7 +146,7 @@ nnoremap k gk
 nnoremap gV `[v`]
 
 " split movement
-nnoremap <C-J> <C-W><C-J> 
+nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
@@ -166,14 +169,10 @@ nnoremap <leader>u :GundoToggle<CR>
 "nnoremap <leader>s :mksession<CR> " I don't have much use for this...
 
 " quickly ack
-nnoremap <leader>a :Ack! 
+" nnoremap <leader>a :Ack!
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline
-let g:airline_powerline_fonts=1 " enable powerline symbols and glyphs
-let g:airline_theme='base16'
-set laststatus=2 " otherwise vim-airline doesn't appear until new split
-
+" list buffers then type one in
+nnoremap <leader>b :ls<cr>:b<space>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Ack.vim
 if executable('ag')
@@ -239,16 +238,53 @@ let g:livepreview_previewer = 'open -a Preview'
 " * trims file format and encoding info on narrow windows
 " * adds git branch to status line
 let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fileformat': 'LightlineFileformat',
-      \   'filetype': 'LightlineFiletype',
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+	\ 'colorscheme': 'seoul256',
+  \ 'separator': { 'left': '', 'right': ''  },
+  \ 'subseparator': { 'left': '', 'right': '' },
+	\ 'active': {
+	\   'left': [ [ 'mode', 'paste' ],
+	\             [ 'cocstatus', 'readonly', 'filename', 'currentfunction' ] ],
+  \   'right': [ [ 'lineinfo'  ],
+  \              [ 'percent'  ],
+  \              [ 'fileformat', 'fileencoding', 'filetype'  ] ],
+	\ },
+  \ 'component': {
+  \   'lineinfo': ' %3l:%-2v%v',
+  \ },
+	\ 'component_function': {
+	\   'filename': 'LightlineFilename',
+	\   'cocstatus': 'coc#status',
+	\   'fileformat': 'LightlineFileformat',
+	\   'filetype': 'LightlineFiletype',
+	\   'gitbranch': 'fugitive#head',
+	\   'currentfunction': 'CocCurrentFunction',
+  \   'readonly': 'LightlineReadonly',
+	\ },
+	\ 'mode_map': {
+		\ 'n' : 'N',
+		\ 'i' : 'I',
+		\ 'R' : 'R',
+		\ 'v' : 'V',
+		\ 'V' : 'VL',
+		\ "\<C-v>": 'VB',
+		\ 'c' : 'C',
+		\ 's' : 'S',
+		\ 'S' : 'SL',
+		\ "\<C-s>": 'SB',
+		\ 't': 'T',
+	\ },
+\ }
+
+" combine filename and modified components - save a |
+function! LightlineFilename()
+  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let modified = &modified ? ' +' : ''
+  return filename . modified
+endfunction
+
+function! LightlineReadonly()
+  return &readonly ? '' : ''
+endfunction
 
 function! LightlineFileformat()
   return winwidth(0) > 70 ? &fileformat : ''
@@ -257,6 +293,25 @@ endfunction
 function! LightlineFiletype()
   return winwidth(0) > 70 ? (&filetype !=# '' ? &filetype : 'no ft') : ''
 endfunction
+
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline.tabline = {
+  \ 'left': [ [ 'buffers' ] ],
+  \ 'right': [ [ 'close' ] ] }
+
+let g:lightline.enable = {
+  \ 'statusline': 1,
+  \ 'tabline': 0
+  \ }
+
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+set laststatus=2
+" set showtabline=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " dhruvasagar/vim-table-mode
@@ -308,12 +363,45 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Use `g[` and `g]` to navigate diagnostics
+nmap <silent> g[ <Plug>(coc-diagnostic-prev)
+nmap <silent> g] <Plug>(coc-diagnostic-next)
+
+" Fix autofix problem of current line
+nmap <leader>af <Plug>(coc-fix-current)
+
+" Remap for format selected region
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
+
+" Used to expand decorations in worksheets
+" nmap <leader>ws <Plug>(coc-metals-expand-decoration)
+
+" Toggle panel with Tree Views
+nnoremap <silent> <space>t :<C-u>CocCommand metals.tvp<CR>
+" Toggle Tree View 'metalsBuild'
+nnoremap <silent> <space>tb :<C-u>CocCommand metals.tvp metalsBuild<CR>
+" Toggle Tree View 'metalsCompile'
+nnoremap <silent> <space>tc :<C-u>CocCommand metals.tvp metalsCompile<CR>
+" Reveal current current class (trait or object) in Tree View 'metalsBuild'
+nnoremap <silent> <space>tf :<C-u>CocCommand metals.revealInTreeView metalsBuild<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-go
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_types = 1
 let g:go_highlight_generate_tags = 1
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-scala
+au BufRead,BufNewFile *.sbt set filetype=scala
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" indent lines
+" let g:indentLine_setColors = 0
+let g:indentLine_char = '▏'
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" rainbow
+let g:rainbow_active = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Miscellaneous
