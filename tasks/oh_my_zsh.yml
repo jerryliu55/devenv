@@ -12,10 +12,10 @@
     path: ~/.oh-my-zsh/custom/themes
     state: directory
 
-- name: zsh custom theme
-  copy:
-    src: ~/.config/devenv/files/dpoggi-modified.zsh-theme
-    dest: ~/.oh-my-zsh/custom/themes/dpoggi-modified.zsh-theme
+# - name: zsh custom theme
+#   copy:
+#     src: ~/.config/devenv/files/dpoggi-modified.zsh-theme
+#     dest: ~/.oh-my-zsh/custom/themes/dpoggi-modified.zsh-theme
 
 # zsh plugins
 

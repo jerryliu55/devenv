@@ -6,8 +6,8 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="bureau"
-ZSH_THEME="dpoggi-modified"
-# ZSH_THEME="bira"
+# ZSH_THEME="dpoggi"
+ZSH_THEME="bira"
 # ZSH_THEME="spaceship"
 # ZSH_THEME="robbyrussell" # default
 
@@ -152,8 +152,8 @@ alias t=task
 alias in='task add +in'
 alias next='task +next'
 alias rdy='task ready'
-alias daydone='timew summary :week && t calendar'
-export PS1='[$(task +in +PENDING count)] '$PS1
+# alias daydone='timew summary :week && t calendar'
+# export PS1='[$(task +in +PENDING count)] '$PS1
 
 # timewarrior setup ============================================================
 

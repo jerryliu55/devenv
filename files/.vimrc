@@ -27,7 +27,7 @@ Plug '/usr/local/opt/fzf' " for fzf.vim
 Plug 'junegunn/fzf.vim'
 Plug 'zenbro/mirror.vim' " easily edit remote files
 Plug 'wlangstroth/vim-racket' " racket
-Plug 'xuhdev/vim-latex-live-preview' " live preview latex files
+" Plug 'xuhdev/vim-latex-live-preview' " live preview latex files
 Plug 'easymotion/vim-easymotion' " faster navigation
 Plug 'vim-scripts/ucpp-vim-syntax' " uC++ syntax highlighting
 Plug 'dhruvasagar/vim-table-mode' " easily make tables in md
@@ -41,6 +41,7 @@ Plug 'Yggdroot/indentLine' " show indentation guides
 Plug 'luochen1990/rainbow' " colour coded matching brackets
 Plug 'wellle/targets.vim' " adds additional text targets to vim for commands like ci'
 Plug 'psliwka/vim-smoothie' " smooth scrolling
+Plug 'drzel/vim-line-no-indicator' " visual document location in status bar
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -154,6 +155,8 @@ nnoremap <C-H> <C-W><C-H>
 vnoremap J :m '>+1<cr>gv=gv
 vnoremap K :m '<-2<cr>gv=gv
 
+set scrolloff=3 " vim starts scrolling when cursor is within 3 lines of top/bottom
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader shortcuts
 
@@ -244,11 +247,12 @@ let g:lightline = {
 	\   'left': [ [ 'mode', 'paste' ],
 	\             [ 'cocstatus', 'readonly', 'filename', 'currentfunction' ] ],
   \   'right': [ [ 'lineinfo'  ],
-  \              [ 'percent'  ],
-  \              [ 'fileformat', 'fileencoding', 'filetype'  ] ],
+  \              [ 'indicator'  ],
+  \            ],
 	\ },
   \ 'component': {
   \   'lineinfo': ' %3l:%-2v%v',
+  \   'indicator': '%{LineNoIndicator()}'
   \ },
 	\ 'component_function': {
 	\   'filename': 'LightlineFilename',

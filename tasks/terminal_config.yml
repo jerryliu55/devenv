@@ -1,17 +1,17 @@
 - name: initialize the iosevka submodule
   shell: git submodule init && git submodule update
   args:
-    chdir: ~/.config/devenv
+    chdir: /Users/jerryliu55/.config/devenv
 
 - name: install custom iosevka font
   copy:
-    src: ~/.config/devenv/files/iosevka-custom/
-    dest: ~/Library/Fonts/
+    src: /Users/jerryliu55/.config/devenv/files/iosevka-custom/
+    dest: /Users/jerryliu55/Library/Fonts/
 
 - name: install base16 scripts
   git:
     repo: https://github.com/chriskempson/base16-shell.git
-    dest: ~/.config/base16-shell
+    dest: /Users/jerryliu55/.config/base16-shell
     update: yes
 
 # does not run with zsh
@@ -23,14 +23,14 @@
 - name: install vundle
   git:
     repo: https://github.com/VundleVim/Vundle.vim.git
-    dest: ~/.vim/bundle/Vundle.vim
+    dest: /Users/jerryliu55/.vim/bundle/Vundle.vim
     update: yes
 
-- name: install all vim plugins
-  shell: vim +PluginInstall +qall
-  args:
-    executable: "/bin/zsh"
-  changed_when: False
+# - name: install all vim plugins
+#   shell: vim +PluginInstall +qall
+#   args:
+#     executable: "/bin/zsh"
+#   changed_when: False
 
 - name: install tmux plugin manager (tpm)
   git:
